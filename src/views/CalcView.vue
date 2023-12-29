@@ -2,9 +2,5 @@
 </script>
 
 <template>
-    <header></header>
-    <main>
-        <div>計算機</div>
-    </main>
-    <footer></footer>
+    <div class="title">計算機</div>
 </template>
