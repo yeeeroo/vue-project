@@ -2,5 +2,7 @@
 </script>
 
 <template>
-    <div class="title">計算機</div>
+    <div></div>
 </template>
+
+<style></style>
