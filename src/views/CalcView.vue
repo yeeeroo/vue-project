@@ -55,6 +55,9 @@ export default {
           break;
       }
     },
+    finalMath(result){
+      this.result = result;
+    }
   },
 }
 </script>
@@ -97,7 +100,7 @@ export default {
       </button> -->
       <!-- 如何將資料傳進components -->
       <!-- 如何從components取得資料 -->
-      <CalcButton :calc-type="calcType" />
+      <CalcButton :calc-type="calcType" :num-a="numA" :num-b="numB" @final-math = "finalMath"/>
       <!-- <MyButton @click="add()">
         <template #placeA>+</template>
         <template #placeB>我是另一個開孔</template>

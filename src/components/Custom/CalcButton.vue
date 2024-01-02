@@ -1,9 +1,8 @@
 <script>
 export default {
-    porps: {
+    props: {
         calcType: {
             type: Array,
-            default: '',
         },
         numA: {
             type: Number,
@@ -12,11 +11,33 @@ export default {
             type: Number,
         },
     },
+    emit:['finalMath'],
     data() {
         return {
             type: this.calcType ?? [],
+            result: 0,
         }
     },
+    methods: {
+        enterCalc(type) {
+            if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+            switch (type) {
+                case '+':
+                    this.result = this.numA + this.numB;
+                    break;
+                case '-':
+                    this.result = this.numA - this.numB;
+                    break;
+                case '*':
+                    this.result = this.numA * this.numB;
+                    break;
+                case '/':
+                    this.result = this.numA / this.numB;
+                    break;
+            }
+            this.$emit('finalMath',this.result);
+        },
+    }
 };
 </script>
 
@@ -31,7 +52,7 @@ export default {
         <div>
             {<slot name="result" />}
         </div> -->
-        <button v-for="item in type" :key="item.id" class="btn" type="button">
+        <button v-for="item in calcType" :key="item.id" class="btn" type="button" @click="enterCalc(item)">
             {{ item }}
         </button>
     </section>
