@@ -6,12 +6,10 @@ export default {
             default: '',
         },
         numA: {
-            type: Array,
-            default: '',
+            type: Number,
         },
         numB: {
-            type: Array,
-            default: '',
+            type: Number,
         },
     },
     data() {
