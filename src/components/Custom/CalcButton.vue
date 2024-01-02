@@ -1,14 +1,6 @@
 <script>
 export default {
-    Array: ['+', '-', '*', '/'],
-    data() {
-        return {
-            numA: 0,
-            numB: 0,
-            result: `
-            <div>我是結果</div>`,
-        };
-    },
+    
 }
 </script>
 

@@ -1,5 +1,5 @@
-<script>
-import { RouterView } from 'vue-router'
+<script type="module">
+import { RouterView } from 'vue-router';
 
 export default {
   // 元件宣告
