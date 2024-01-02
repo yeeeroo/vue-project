@@ -9,8 +9,8 @@ export default {
   // 放置所有變數的位置
   data() {
     return {
-      numA: '',
-      numB: '',
+      numA: 0,
+      numB: 0,
       result: 0,
       html: `
       <div>
@@ -107,7 +107,7 @@ export default {
       <MyButton @click="divide()">/</MyButton>
     </div> -->
     </div>
-    <div class="output text-">
+    <div class="output">
       輸出結果: {{ result }}
     </div>
   </div>
