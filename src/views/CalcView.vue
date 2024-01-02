@@ -15,6 +15,18 @@ export default {
       if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
       this.result = this.numA + this.numB;
     },
+    reduce() {
+      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+      this.result = this.numA - this.numB;
+    },
+    times() {
+      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+      this.result = this.numA * this.numB;
+    },
+    divide() {
+      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+      this.result = this.numA / this.numB;
+    }
   },
 }
 </script>
@@ -37,12 +49,10 @@ export default {
     </div>
 
     <div class="btns">
-      <button class="btn" type="button" @click="add()">
-        +
-      </button>
-      <button class="btn" type="button">-</button>
-      <button class="btn" type="button">*</button>
-      <button class="btn" type="button">/</button>
+      <button class="btn" type="button" @click="add()">+</button>
+      <button class="btn" type="button" @click="reduce()">-</button>
+      <button class="btn" type="button" @click="times()">*</button>
+      <button class="btn" type="button" @click="divide()">/</button>
     </div>
     <div class="output">
       輸出結果: {{ result }}
