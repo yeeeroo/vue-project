@@ -1,34 +1,60 @@
 <script>
-import MyButton from '@/components/custom/CalcButton.vue';
+// import MyButton from '@/components/custom/MyButton.vue';
+import CalcButton from '@/components/custom/CalcButton.vue';
 
 export default {
+  components: {
+    CalcButton,
+  },
   // 放置所有變數的位置
   data() {
     return {
       numA: 0,
       numB: 0,
       result: 0,
+      html: `
+      <div>
+        123
+      </div>`,
+      calcType: ['+', '-', '*', '/'],
     };
   },
   // 放置所有function的位置
   methods: {
-    add() {
-      // 先判斷numA numB 不為空
+    // add() {
+    //   // 先判斷numA numB 不為空
+    //   if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+    //   this.result = this.numA + this.numB;
+    // },
+    // reduce() {
+    //   if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+    //   this.result = this.numA - this.numB;
+    // },
+    // times() {
+    //   if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+    //   this.result = this.numA * this.numB;
+    // },
+    // divide() {
+    //   if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
+    //   this.result = this.numA / this.numB;
+    // }
+    calcNumber(type) {
       if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
-      this.result = this.numA + this.numB;
+      switch (type) {
+        case '+':
+          this.result = this.numA + this.numB;
+          break;
+        case '-':
+          this.result = this.numA - this.numB;
+          break;
+        case '*':
+          this.result = this.numA * this.numB;
+          break;
+        case '/':
+          this.result = this.numA / this.numB;
+          break;
+      }
     },
-    reduce() {
-      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
-      this.result = this.numA - this.numB;
-    },
-    times() {
-      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
-      this.result = this.numA * this.numB;
-    },
-    divide() {
-      if (this.numA.toString().trim() === '' || this.numB.toString().trim() === '') return;
-      this.result = this.numA / this.numB;
-    }
   },
 }
 </script>
@@ -50,7 +76,8 @@ export default {
   <!-- v-on 省略的寫法"@" 後面連接觸發的事件名稱 -->
   <div class="calc">
     計算機
-    <div>
+    <div v-html="html"></div>
+    <div >
       <label>
         數字A:
         <!-- v-model -->
@@ -70,13 +97,15 @@ export default {
       </button> -->
       <!-- 如何將資料傳進components -->
       <!-- 如何從components取得資料 -->
-      <MyButton @click="add()">
+      <CalcButton :calc-type="calcType" />
+      <!-- <MyButton @click="add()">
         <template #placeA>+</template>
         <template #placeB>我是另一個開孔</template>
       </MyButton>
       <MyButton @click="reduce()">-</MyButton>
       <MyButton @click="times()">*</MyButton>
       <MyButton @click="divide()">/</MyButton>
+    </div> -->
     </div>
     <div class="output text-main-deep">
       輸出結果: {{ result }}
