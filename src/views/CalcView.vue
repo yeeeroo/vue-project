@@ -78,16 +78,16 @@ export default {
 
   <!-- v-on 省略的寫法"@" 後面連接觸發的事件名稱 -->
   <div class="calc">
-    <div class="text-xl">計算機Calculator</div>
+    <div class="text-xl inline-block px-3 py-1 border-solid border-2">計算機 Calculator</div>
     <!-- <div v-html="html"></div> -->
-    <div >
+    <div class="pl-2 pt-3">
       <label>
         數字 A:
         <!-- v-model -->
         <input v-model="numA" type="number">
       </label>
     </div>
-    <div>
+    <div class="pl-2 pt-3">
       <label>
         數字 B:
         <input v-model="numB" type="number">
@@ -110,7 +110,7 @@ export default {
       <MyButton @click="divide()">/</MyButton>
     </div> -->
     </div>
-    <div class="output">
+    <div class="mt-2">
       結果Answer: {{ result }}
     </div>
   </div>

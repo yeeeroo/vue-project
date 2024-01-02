@@ -52,8 +52,11 @@ export default {
         <div>
             {<slot name="result" />}
         </div> -->
-        <button v-for="item in calcType" :key="item.id" class="btn" type="button" @click="enterCalc(item)">
+        <button v-for="item in calcType" :key="item.id" class="px-3 py-1 mr-2 mt-2 border rounded-lg" type="button" @click="enterCalc(item)">
             {{ item }}
+        </button>
+        <button>
+
         </button>
     </section>
 </template>
