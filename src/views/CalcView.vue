@@ -12,10 +12,10 @@ export default {
       numA: 0,
       numB: 0,
       result: 0,
-      html: `
-      <div>
-        123
-      </div>`,
+      // html: `
+      // <div>
+      //   123
+      // </div>`,
       calcType: ['+', '-', '*', '/'],
     };
   },
@@ -78,18 +78,18 @@ export default {
 
   <!-- v-on 省略的寫法"@" 後面連接觸發的事件名稱 -->
   <div class="calc">
-    計算機
-    <div v-html="html"></div>
+    <div class="text-xl">計算機Calculator</div>
+    <!-- <div v-html="html"></div> -->
     <div >
       <label>
-        數字A:
+        數字 A:
         <!-- v-model -->
         <input v-model="numA" type="number">
       </label>
     </div>
     <div>
       <label>
-        數字B:
+        數字 B:
         <input v-model="numB" type="number">
       </label>
     </div>
@@ -111,7 +111,7 @@ export default {
     </div> -->
     </div>
     <div class="output">
-      輸出結果: {{ result }}
+      結果Answer: {{ result }}
     </div>
   </div>
 </template>

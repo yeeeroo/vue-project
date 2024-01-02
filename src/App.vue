@@ -18,7 +18,7 @@ export default {
   </header>
   <main>
     <RouterView />
-    <div class="calc">我來自公版</div>
+    <!-- <div class="calc">我來自公版</div> -->
   </main>
   <footer>
   </footer>
