@@ -15,7 +15,7 @@ export default {
     <RouterLink to="/">home</RouterLink>
     <RouterLink to="/about">about</RouterLink>
     <RouterLink to="/calc">calc</RouterLink>
-    <RouterLink to="/todo">todo</RouterLink>
+    <RouterLink to="/todoList">todo list</RouterLink>
   </header>
   <main>
     <RouterView />
