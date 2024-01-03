@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         addTodos() {
-            this.todos.push({ id: this.id++,text: this.newTodos, done: false, });
+            this.todos.push({ id: this.id++, text: this.newTodos, done: false, });
             this.newTodos = '';
         }
     },
@@ -49,4 +49,15 @@ export default {
     </form>
 </template>
 
-<style></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;700;900&display=swap');
+
+html,
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+#app {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+</style>
