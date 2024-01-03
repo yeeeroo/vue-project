@@ -10,7 +10,7 @@ export default {
                     done: true,
                 },
                 {
-                    id: 1,
+                    id: 2,
                     text: 'grocery shopping',
                     done: true,
                 },
@@ -19,9 +19,19 @@ export default {
     },
     methods: {
         addTodos() {
-            this.todos.push({ id: this.id++, text: this.newTodos, done: false, });
+            // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
+            if (!this.newTodos) return;
+            // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
+            const listId = this.todos.length ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
+            // 印出新增的事項
+            this.todos.push({
+                id: listId,
+                text: this.newTodos,
+                done: false,
+            });
+            // 在印出後，清空新增事項欄位
             this.newTodos = '';
-        }
+        },
     },
 }
 </script>
@@ -50,6 +60,7 @@ export default {
 </template>
 
 <style>
+/* import googl font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;700;900&display=swap');
 
 html,
