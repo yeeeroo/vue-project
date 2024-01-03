@@ -25,6 +25,13 @@ export default {
                 : this.todos
         }
     },
+    // 當網頁載入時觸發
+    mounted() {
+        // 將sessionStorage裡的JSON格式資料轉檔放回陣列
+        if (sessionStorage.getItem('todos')) {
+            this.todos = JSON.parse(sessionStorage.getItem('todos'));
+        }
+    },
     methods: {
         addTodos() {
             // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
@@ -39,6 +46,8 @@ export default {
             });
             // 在印出後，清空新增事項欄位
             this.newTodos = '';
+            // 將新一筆資料以JSON格式存入sessionStorage
+            sessionStorage.setItem('todos', JSON.stringify(this.todos));
         },
     },
 }
