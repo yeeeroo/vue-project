@@ -17,6 +17,7 @@ export default {
       //   123
       // </div>`,
       calcType: ['+', '-', '*', '/'],
+      numbers: [0,1,2,3,4,5,6,7,8,9],
     };
   },
   // 放置所有function的位置
@@ -109,6 +110,11 @@ export default {
       <MyButton @click="times()">*</MyButton>
       <MyButton @click="divide()">/</MyButton>
     </div> -->
+    </div>
+    <div class="">
+      <button v-for="number in numbers" :key="number.id" class="px-6 py-3 mt-5 border">
+        {{ number }}
+      </button>
     </div>
     <div class="mt-2">
       結果Answer: {{ result }}
