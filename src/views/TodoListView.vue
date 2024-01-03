@@ -3,18 +3,26 @@ export default {
     data() {
         return {
             newTodos: '',
+            hideCompleted: false,
             todos: [
                 {
                     id: 1,
                     text: 'laundry',
-                    done: true,
+                    done: false,
                 },
                 {
                     id: 2,
                     text: 'grocery shopping',
-                    done: true,
+                    done: false,
                 },
             ]
+        }
+    },
+    computed: {
+        filteredTodos() {
+            return this.hideCompleted
+                ? this.todos.filter((t) => !t.done)
+                : this.todos
         }
     },
     methods: {
@@ -41,14 +49,14 @@ export default {
         <h1 class="text-xl px-2 py-1">
             待辦清單:
         </h1>
-        <div class="">
+        <div class="px-3 pt-2">
             <input type="text" v-model="newTodos" placeholder="新增事項..." class="border px-2">
             <button type="button" @click="addTodos()" class="border px-2">新增</button>
         </div>
         <ul class="px-3 py-2">
-            <li v-for=" todo in todos" :key="todo.id" class="px-1">
-                <input type="checkbox" class="p-1">
-                <span class="px-3">
+            <li v-for=" todo in todos" :key="todo.id" class="px-1 text-lg">
+                <input type="checkbox" class="p-1" v-model="todo.done">
+                <span :class="{ 'line-through text-sm': todo.done === true }" class="px-2">
                     {{ todo.text }}
                 </span>
             </li>
