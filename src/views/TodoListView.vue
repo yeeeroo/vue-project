@@ -1,4 +1,6 @@
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     data() {
         return {
@@ -48,6 +50,23 @@ export default {
             sessionStorage.setItem('todos', JSON.stringify(todos));
         },
         removeTodo(id) {
+            Swal.fire({
+                title: "是否確認刪除？",
+                text: "警告：無法還原此步驟",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "確認刪除"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "完成刪除",
+                        text: "事項已被刪除",
+                        icon: "success"
+                    });
+                }
+            });
             const deleteList = this.todos.filter(todo => todo.id !== id);
             this.todos = deleteList;
             // 將新一筆資料以JSON格式存入sessionStorage
@@ -91,7 +110,7 @@ export default {
         </ul>
         <!-- 進度條 -->
         <div>
-            
+
         </div>
     </form>
 </template>
