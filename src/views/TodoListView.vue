@@ -3,7 +3,6 @@ export default {
     data() {
         return {
             newTodos: '',
-            hideCompleted: false,
             todos: [
                 {
                     id: 1,
@@ -18,13 +17,6 @@ export default {
             ]
         }
     },
-    computed: {
-        filteredTodos() {
-            return this.hideCompleted
-                ? this.todos.filter((t) => !t.done)
-                : this.todos
-        }
-    },
     // 當網頁載入時觸發
     mounted() {
         // 將sessionStorage裡的JSON格式資料轉檔放回陣列
@@ -34,20 +26,22 @@ export default {
     },
     methods: {
         addTodos() {
+            // 解構
+            let { newTodos, todos } = this;
             // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
-            if (!this.newTodos) return;
+            if (!newTodos) return;
             // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
-            const listId = this.todos.length ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
+            const listId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
             // 印出新增的事項
-            this.todos.push({
+            todos.push({
                 id: listId,
-                text: this.newTodos,
+                text: newTodos,
                 done: false,
             });
             // 在印出後，清空新增事項欄位
             this.newTodos = '';
             // 將新一筆資料以JSON格式存入sessionStorage
-            sessionStorage.setItem('todos', JSON.stringify(this.todos));
+            sessionStorage.setItem('todos', JSON.stringify(todos));
         },
     },
 }
@@ -59,12 +53,16 @@ export default {
             待辦清單:
         </h1>
         <div class="px-3 pt-2">
-            <input type="text" v-model="newTodos" placeholder="新增事項..." class="border px-2">
+            <input type="text" v-model="newTodos" placeholder="新增事項..." class="border-2 px-2">
             <button type="button" @click="addTodos()" class="border px-2">新增</button>
+            <div class="my-1">
+                截止日:<input type="date" class="border-2">
+                登錄日:<input type="date" class="border-2">
+            </div>
         </div>
         <ul class="px-3 py-2">
             <li v-for=" todo in todos" :key="todo.id" class="px-1 text-lg">
-                <input type="checkbox" class="p-1" v-model="todo.done">
+                <input type="checkbox" v-model="todo.done" class="p-1">
                 <span :class="{ 'line-through text-sm': todo.done === true }" class="px-2">
                     {{ todo.text }}
                 </span>
