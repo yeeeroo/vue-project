@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             newTodos: '',
+            deadline: '',
             todos: [
                 {
                     id: 1,
@@ -26,10 +27,11 @@ export default {
     },
     methods: {
         addTodos() {
+            let date = new Date().toISOString().split('T');
             // 解構
-            let { newTodos, todos } = this;
+            const { newTodos, todos, deadline } = this;
             // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
-            if (!newTodos) return;
+            if (!newTodos && !deadline) return;
             // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
             const listId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
             // 印出新增的事項
@@ -37,12 +39,20 @@ export default {
                 id: listId,
                 text: newTodos,
                 done: false,
+                currentDate: date[0],
+                deadline: deadline,
             });
             // 在印出後，清空新增事項欄位
             this.newTodos = '';
             // 將新一筆資料以JSON格式存入sessionStorage
             sessionStorage.setItem('todos', JSON.stringify(todos));
         },
+        removeTodo(id) {
+            const deleteList = this.todos.filter(todo => todo.id !== id);
+            this.todos = deleteList;
+            // 將新一筆資料以JSON格式存入sessionStorage
+            sessionStorage.setItem('todos', JSON.stringify(deleteList));
+        }
     },
 }
 </script>
@@ -53,24 +63,30 @@ export default {
             待辦清單:
         </h1>
         <div class="px-3 pt-2">
-            <input type="text" v-model="newTodos" placeholder="新增事項..." class="border-2 px-2">
-            <button type="button" @click="addTodos()" class="border px-2">新增</button>
-            <div class="my-1">
-                截止日:<input type="date" class="border-2">
-                登錄日:<input type="date" class="border-2">
+            <div class="mb-1">截止日:<input type="date" v-model="deadline" class="border-2"></div>
+            <div>
+                <input type="text" v-model="newTodos" placeholder="新增事項..." class="border-2 px-2">
+                <button type="button" @click="addTodos()" class="border px-2">新增</button>
             </div>
         </div>
         <ul class="px-3 py-2">
-            <li v-for=" todo in todos" :key="todo.id" class="px-1 text-lg">
-                <input type="checkbox" v-model="todo.done" class="p-1">
+            <li v-for=" todo in todos" :key="todo.id" class="text-xl hover:ring-1">
+                <input type="checkbox" v-model="todo.done">
                 <span :class="{ 'line-through text-sm': todo.done === true }" class="px-2">
-                    {{ todo.text }}
+                    {{ todo.text }},
+                    Deadline: {{ todo.deadline }}
                 </span>
+                <div class="px-2 pb-2">
+                    <span class="text-sm font-light">
+                        Record Date: {{ todo.currentDate }}
+                    </span>
+                    <button type="button" @click="removeTodo(todo.id)" class="float-end text-2xl">
+                        <font-awesome-icon :icon="['fas', 'trash-can']" />
+                    </button>
+                </div>
             </li>
         </ul>
-        <button type="button" class="px-3 py-2">
-            <font-awesome-icon :icon="['fas', 'trash-can']" />
-        </button>
+
     </form>
 </template>
 
