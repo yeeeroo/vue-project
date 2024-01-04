@@ -20,6 +20,7 @@ export default {
             ]
         }
     },
+
     // 當網頁載入時觸發
     mounted() {
         // 將sessionStorage裡的JSON格式資料轉檔放回陣列
@@ -33,21 +34,56 @@ export default {
             // 解構
             const { newTodos, todos, deadline } = this;
             // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
-            if (!newTodos || !deadline) return;
-            // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
-            const listId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
-            // 印出新增的事項
-            todos.push({
-                id: listId,
-                text: newTodos,
-                done: false,
-                currentDate: date[0],
-                deadline: deadline,
-            });
-            // 在印出後，清空新增事項欄位
-            this.newTodos = '';
-            // 將新一筆資料以JSON格式存入sessionStorage
-            sessionStorage.setItem('todos', JSON.stringify(todos));
+            if (!newTodos || !deadline) {
+                Swal.fire({
+                    title: "警告：尚有空白處",
+                    text: "日期或事項尚未填寫完成",
+                    icon: "warning",
+                    showDenyButton: true,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`,
+                    showClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                    `
+                    },
+                    hideClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                    `
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
+                        const listId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
+                        // 印出新增的事項
+                        todos.push({
+                            id: listId,
+                            text: newTodos,
+                            done: false,
+                            currentDate: date[0],
+                            deadline: deadline,
+                        });
+                        // 在印出後，清空新增事項欄位
+                        this.newTodos = '';
+                        // 將新一筆資料以JSON格式存入sessionStorage
+                        sessionStorage.setItem('todos', JSON.stringify(todos));
+                        Swal.fire({
+                        title: "完成新增",
+                        text: "已加入清單",
+                        icon: "success"
+                    });
+                    } else {
+                        return;
+                    }
+                })
+            }
+
         },
         removeTodo(id) {
             Swal.fire({
@@ -86,8 +122,8 @@ export default {
                     });
                 }
             });
-        }
-    },
+        },
+    }
 }
 </script>
 
