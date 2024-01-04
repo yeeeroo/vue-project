@@ -53,11 +53,12 @@ export default {
             Swal.fire({
                 title: "是否確認刪除？",
                 text: "警告：無法還原此步驟",
-                icon: "warning",
+                icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "確認刪除"
+                confirmButtonText: "確認刪除",
+                cancelButtonText: "取消",
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
