@@ -59,8 +59,26 @@ export default {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "確認刪除",
                 cancelButtonText: "取消",
+                showClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                    `
+                },
+                hideClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                    `
+                },
             }).then((result) => {
                 if (result.isConfirmed) {
+                    const deleteList = this.todos.filter(todo => todo.id !== id);
+                    this.todos = deleteList;
+                    // 將新一筆資料以JSON格式存入sessionStorage
+                    sessionStorage.setItem('todos', JSON.stringify(deleteList));
                     Swal.fire({
                         title: "完成刪除",
                         text: "事項已被刪除",
@@ -68,10 +86,6 @@ export default {
                     });
                 }
             });
-            const deleteList = this.todos.filter(todo => todo.id !== id);
-            this.todos = deleteList;
-            // 將新一筆資料以JSON格式存入sessionStorage
-            sessionStorage.setItem('todos', JSON.stringify(deleteList));
         }
     },
 }
