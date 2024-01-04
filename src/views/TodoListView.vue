@@ -31,7 +31,7 @@ export default {
             // 解構
             const { newTodos, todos, deadline } = this;
             // 讓 新增事項欄位(newTodos) 為空白時，無法新增新事項
-            if (!newTodos && !deadline) return;
+            if (!newTodos || !deadline) return;
             // 抓取 陣列(todos) 裡的最大數id，此id+1後為陣列的下一個id，如果沒有最大數的話則id為1
             const listId = todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
             // 印出新增的事項
@@ -59,14 +59,17 @@ export default {
 
 <template>
     <form class="border p-2">
-        <h1 class="text-xl px-2 py-1">
+        <h1 class="text-3xl px-2 py-1 mb-2">
             待辦清單:
         </h1>
-        <div class="px-3 pt-2">
-            <div class="mb-1">截止日:<input type="date" v-model="deadline" class="border-2"></div>
-            <div>
-                <input type="text" v-model="newTodos" placeholder="新增事項..." class="border-2 px-2">
-                <button type="button" @click="addTodos()" class="border px-2">新增</button>
+        <div class="px-3">
+            <div class="mb-2">
+                <span class="text-lg">截止日: </span>
+                <input type="date" v-model="deadline" class="border-2">
+            </div>
+            <div class="mb-2">
+                <input type="text" v-model="newTodos" placeholder="新增事項..." class="border-2 px-2 py-1 mr-1">
+                <button type="button" @click="addTodos()" class="border-2 px-2 py-1 bg-violet-400 text-white">新增</button>
             </div>
         </div>
         <ul class="px-3 py-2">
@@ -86,7 +89,10 @@ export default {
                 </div>
             </li>
         </ul>
-
+        <!-- 進度條 -->
+        <div>
+            
+        </div>
     </form>
 </template>
 
