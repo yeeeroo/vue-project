@@ -25,6 +25,10 @@ const router = createRouter({
       path: '/todoList',
       name: 'todoList',
       component: () => import('../views/TodoListView.vue')
+    },{
+      path: '/picUpload',
+      name: 'picUpload',
+      component: () => import('../views/PicUploadView.vue')
     }
   ]
 })

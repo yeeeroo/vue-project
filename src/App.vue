@@ -14,8 +14,9 @@ export default {
   <header>
     <RouterLink to="/">home</RouterLink>
     <RouterLink to="/about">about</RouterLink>
-    <RouterLink to="/calc">calc</RouterLink>
-    <RouterLink to="/todoList">todolist</RouterLink>
+    <RouterLink to="/calc">計算機</RouterLink>
+    <RouterLink to="/todoList">待辦清單</RouterLink>
+    <RouterLink to="/picUpload">上傳照片</RouterLink>
   </header>
   <main>
     <RouterView />
