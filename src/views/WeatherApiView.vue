@@ -1,5 +1,10 @@
 <script>
+import WeatherCards from '@/components/custom/WeatherCards.vue';
+
 export default{
+    components:{
+        WeatherCards,    
+    },
     data() {
         return{
             weatherData:[],
@@ -10,9 +15,10 @@ export default{
     },
 }
 </script>
+
 <template>
     <div>
-
+        <WeatherCards />
     </div>
 </template>
 
