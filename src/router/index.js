@@ -29,7 +29,11 @@ const router = createRouter({
       path: '/picUpload',
       name: 'picUpload',
       component: () => import('../views/PicUploadView.vue')
-    }
+    },{
+      path: '/weatherApi',
+      name: 'weatherApi',
+      component: () => import('../views/WeatherApiView.vue')
+    },
   ]
 })
 

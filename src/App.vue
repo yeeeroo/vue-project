@@ -17,6 +17,7 @@ export default {
     <RouterLink to="/calc">計算機</RouterLink>
     <RouterLink to="/todoList">待辦清單</RouterLink>
     <RouterLink to="/picUpload">上傳照片</RouterLink>
+    <RouterLink to="/weatherApi">天氣預報</RouterLink>
   </header>
   <main>
     <RouterView />
